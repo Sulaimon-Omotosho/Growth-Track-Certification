@@ -20,15 +20,29 @@ export function DownloadButtons({
       .replace(/\s+/g, '-')
       .replace(/[^\w-]/g, '') || 'certificate'
 
+  const generateCanvasDataUrl = async (
+    targetNode: HTMLElement,
+  ): Promise<string> => {
+    await toPng(targetNode, { cacheBust: true, pixelRatio: 3 })
+
+    return await toPng(targetNode, {
+      cacheBust: true,
+      pixelRatio: 3,
+      style: {
+        transform: 'scale(1)',
+        transformOrigin: 'top left',
+        width: targetNode.offsetWidth + 'px',
+        height: targetNode.offsetHeight + 'px',
+      },
+    })
+  }
+
   const downloadPNG = async () => {
     if (!certificateRef.current) return
     setIsExporting(true)
 
     try {
-      const dataUrl = await toPng(certificateRef.current, {
-        cacheBust: true,
-        pixelRatio: 3,
-      })
+      const dataUrl = await generateCanvasDataUrl(certificateRef.current)
 
       const link = document.createElement('a')
       link.download = `${getFileName()}.png`
@@ -46,11 +60,7 @@ export function DownloadButtons({
     setIsExporting(true)
 
     try {
-      const dataUrl = await toPng(certificateRef.current, {
-        cacheBust: true,
-        pixelRatio: 3,
-      })
-
+      const dataUrl = await generateCanvasDataUrl(certificateRef.current)
       const img = new Image()
       img.src = dataUrl
 

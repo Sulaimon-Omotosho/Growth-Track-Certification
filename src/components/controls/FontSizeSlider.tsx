@@ -23,7 +23,7 @@ export function FontSizeSlider({ certificate, setCertificate }: Props) {
 
       <Slider
         value={[certificate.fontSize]}
-        min={24}
+        min={10}
         max={144}
         step={1}
         className='py-1 cursor-pointer'

@@ -1,65 +1,3 @@
-// 'use client'
-
-// import Image from 'next/image'
-// import { CertificateCanvasProps } from '@/types/certificate'
-// import { Rnd } from 'react-rnd'
-// import React from 'react'
-
-// export function CertificateCanvas({
-//   certificate,
-//   setCertificate,
-//   certificateRef,
-// }: CertificateCanvasProps) {
-//   return (
-//     <div
-//       ref={certificateRef}
-//       className='relative shrink-0 overflow-hidden rounded-md bg-white shadow-xl selection:bg-transparent max-w-[70vw] max-h-screen'
-//     >
-//       {/* Base Template Image */}
-
-//       <Image
-//         src={certificate.image}
-//         alt='Certificate Template'
-//         width={800}
-//         height={565}
-//         priority
-//         className='block max-w-full max-h-full object-contain pointer-events-none select-none'
-//       />
-
-//       {/* Drag & Drop Overlay Text */}
-//       <Rnd
-//         bounds='parent'
-//         enableResizing={false}
-//         position={certificate.position}
-//         onDragStop={(e, d) =>
-//           setCertificate((prev) => ({
-//             ...prev,
-//             position: { x: d.x, y: d.y },
-//           }))
-//         }
-//       >
-//         <div className='group relative cursor-move p-2 rounded hover:ring-2 hover:ring-indigo-500/50 transition-shadow'>
-//           <h1
-//             className='select-none whitespace-nowrap font-bold leading-none tracking-wide'
-//             style={{
-//               fontSize: `${certificate.fontSize}px`,
-//               fontFamily: certificate.fontFamily,
-//               color: certificate.textColor,
-//             }}
-//           >
-//             {certificate.name || 'Recipient Name'}
-//           </h1>
-
-//           {/* Subtle drag-handle cue shown on hover */}
-//           <span className='absolute -top-6 left-1/2 -translate-x-1/2 scale-75 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all bg-indigo-600 text-white text-[10px] font-medium px-1.5 py-0.5 rounded shadow'>
-//             Drag to position
-//           </span>
-//         </div>
-//       </Rnd>
-//     </div>
-//   )
-// }
-
 'use client'
 
 import Image from 'next/image'
@@ -142,12 +80,12 @@ export function CertificateCanvas({
 
       {/* Editable Date Overlay (Rendered only on pages that pass setIssueDate) */}
       {setIssueDate !== undefined && (
-        <div className='absolute bottom-[15%] left-[26%] -translate-x-1/2 w-[28%] text-center z-10'>
+        <div className='absolute bottom-[15%] left-[26%] -translate-x-1/2 w-[29%] text-center z-10'>
           <input
             type='text'
             value={issueDate ?? ''}
             onChange={(e) => setIssueDate(e.target.value)}
-            className='w-full bg-transparent border-b border-transparent hover:border-zinc-300 focus:border-zinc-500 focus:outline-none text-center font-serif text-[15px] sm:text-[18px] md:text-[20px] font-semibold text-zinc-800 transition-colors'
+            className='w-full bg-transparent border-b border-transparent hover:border-zinc-300 focus:border-zinc-500 focus:outline-none text-center font-serif font-semibold text-zinc-900 transition-colors text-[8px] xs:text-[8px] sm:text-[10px] md:text-[14px] lg:text-[18px] xl:text-[20px] leading-tight p-0'
             aria-label='Certificate Date'
           />
         </div>

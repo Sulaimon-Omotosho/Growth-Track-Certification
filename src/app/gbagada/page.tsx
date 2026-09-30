@@ -62,7 +62,7 @@ export default function Home() {
               <CertificateCanvas
                 certificate={certificate}
                 setCertificate={setCertificate}
-                certificateRef={certificateRef}
+                certificateRef={certificateRef as any}
               />
             </div>
           </div>

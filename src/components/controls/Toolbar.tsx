@@ -10,30 +10,68 @@ import { FontFamilySelect } from './FontFamilySelect'
 import { TextColorPicker } from './TextColorPicker'
 import { Footer } from '../layouts/Footer'
 
-export function Toolbar({ certificate, setCertificate }: ToolbarProps) {
+// Extended props to support date management
+interface ExtendedToolbarProps extends ToolbarProps {
+  issueDate?: string
+  setIssueDate?: (date: string) => void
+}
+
+export function Toolbar({
+  certificate,
+  setCertificate,
+  issueDate,
+  setIssueDate,
+}: ExtendedToolbarProps) {
   return (
     <div className='flex flex-col h-full justify-between space-y-6'>
       <div className='space-y-6'>
-        {/* Section 1: Recipient Identity */}
-        <div className='space-y-2.5'>
-          <Label
-            htmlFor='recipient-name'
-            className='text-xs font-semibold text-zinc-500 uppercase tracking-wider dark:text-zinc-400'
-          >
-            Graduand Details
+        {/* Section 1: Recipient & Issue Details */}
+        <div className='space-y-4'>
+          <Label className='text-xs font-semibold text-zinc-500 uppercase tracking-wider dark:text-zinc-400'>
+            Graduand & Issue Details
           </Label>
-          <Input
-            id='recipient-name'
-            value={certificate.name}
-            placeholder='Enter recipient name'
-            className='h-10 border-zinc-200 focus-visible:ring-indigo-500 dark:border-zinc-800'
-            onChange={(e) =>
-              setCertificate((prev) => ({
-                ...prev,
-                name: e.target.value,
-              }))
-            }
-          />
+
+          {/* Recipient Name Field */}
+          <div className='space-y-1.5'>
+            <Label
+              htmlFor='recipient-name'
+              className='text-xs font-medium text-zinc-600 dark:text-zinc-400'
+            >
+              Recipient Name
+            </Label>
+            <Input
+              id='recipient-name'
+              value={certificate.name}
+              placeholder='Enter recipient name'
+              className='h-10 border-zinc-200 focus-visible:ring-indigo-500 dark:border-zinc-800'
+              onChange={(e) =>
+                setCertificate((prev) => ({
+                  ...prev,
+                  name: e.target.value,
+                }))
+              }
+            />
+          </div>
+
+          {/* Optional Issue Date Field */}
+          {setIssueDate !== undefined && (
+            <div className='space-y-1.5'>
+              <Label
+                htmlFor='issue-date'
+                className='text-xs font-medium text-zinc-600 dark:text-zinc-400'
+              >
+                Issue Date
+              </Label>
+              <Input
+                id='issue-date'
+                type='text'
+                value={issueDate ?? ''}
+                placeholder='e.g. October 24, 2026'
+                className='h-10 border-zinc-200 focus-visible:ring-indigo-500 dark:border-zinc-800'
+                onChange={(e) => setIssueDate(e.target.value)}
+              />
+            </div>
+          )}
         </div>
 
         <hr className='border-zinc-100 dark:border-zinc-800' />

@@ -20,7 +20,6 @@ export function CertificateCanvas({
   issueDate,
   setIssueDate,
 }: CertificateCanvasProps) {
-  // Set default formatted date on mount if date state exists but is empty
   useEffect(() => {
     if (setIssueDate && !issueDate) {
       const today = new Date().toLocaleDateString('en-US', {

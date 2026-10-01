@@ -10,8 +10,7 @@ import { CertificateState } from '@/types/certificate'
 export default function Home() {
   const [certificate, setCertificate] = useState<CertificateState>({
     name: 'John Doe',
-    image: '/templates/Ghana Cert.png',
-    // image: '/templates/default.png',
+    image: '/templates/default.png',
     fontSize: 60,
     fontFamily: 'serif',
     textColor: '#000000',
@@ -27,7 +26,7 @@ export default function Home() {
         <aside className='w-full lg:w-85 border-t lg:border-t-0 lg:border-r border-zinc-200 bg-white p-6 order-last lg:order-first lg:overflow-y-auto dark:border-zinc-800 dark:bg-zinc-900 shrink-0 shadow-sm'>
           <div className='flex flex-col gap-1 mb-6'>
             <h1 className='text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-50'>
-              Certificate Studio
+              Gbagada Certificate Studio
             </h1>
             <p className='text-xs text-zinc-500 dark:text-zinc-400'>
               Customize and issue emergency graduand certifications.

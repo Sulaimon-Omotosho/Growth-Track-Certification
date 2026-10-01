@@ -64,10 +64,7 @@ export default function GhanaCertificatePage() {
 
           {/* Centered Stage Wrapper */}
           <div className='flex-1 overflow-x-auto overflow-y-hidden p-4 sm:p-8 flex items-center justify-start lg:justify-center bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] dark:bg-[radial-gradient(#1f2937_1px,transparent_1px)]'>
-            <div
-              // ref={certificateRef}
-              className='relative my-auto mx-auto shrink-0 shadow-2xl rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white p-2'
-            >
+            <div className='relative my-auto mx-auto shrink-0 shadow-2xl rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white p-2'>
               <CertificateCanvas
                 certificate={certificate}
                 setCertificate={setCertificate}

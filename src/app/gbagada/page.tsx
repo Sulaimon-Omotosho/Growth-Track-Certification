@@ -10,7 +10,8 @@ import { CertificateState } from '@/types/certificate'
 export default function Home() {
   const [certificate, setCertificate] = useState<CertificateState>({
     name: 'John Doe',
-    image: '/templates/default.png',
+    image: '/templates/Ghana Cert.png',
+    // image: '/templates/default.png',
     fontSize: 60,
     fontFamily: 'serif',
     textColor: '#000000',

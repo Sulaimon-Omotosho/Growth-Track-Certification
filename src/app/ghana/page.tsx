@@ -6,7 +6,6 @@ import { Toolbar } from '@/components/controls/Toolbar'
 import { MainLayout } from '@/components/layouts/MainLayout'
 import { CertificateCanvas } from '@/components/certificate/CertificateCanvas'
 import { CertificateState } from '@/types/certificate'
-import { EditableDateField } from '@/components/controls/EditabaleDate'
 
 export default function GhanaCertificatePage() {
   const [certificate, setCertificate] = useState<CertificateState>({
@@ -15,8 +14,7 @@ export default function GhanaCertificatePage() {
     fontSize: 60,
     fontFamily: 'serif',
     textColor: '#000000',
-    position: { x: 220, y: 180 },
-    // position: { x: 100, y: 100 },
+    position: { x: 100, y: 100 },
   })
 
   const [issueDate, setIssueDate] = useState<string>('')
@@ -42,20 +40,6 @@ export default function GhanaCertificatePage() {
             issueDate={issueDate}
             setIssueDate={setIssueDate}
           />
-
-          {/* Optional Sidebar Control for Date */}
-          {/* <div className='mt-6 pt-6 border-t border-zinc-200 dark:border-zinc-800'>
-            <label className='block text-xs font-medium text-zinc-700 dark:text-zinc-300 mb-2'>
-              Issue Date
-            </label>
-            <input
-              type='text'
-              value={issueDate}
-              placeholder='e.g. October 24, 2026'
-              onChange={(e) => setIssueDate(e.target.value)}
-              className='w-full px-3 py-2 text-xs rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-500'
-            />
-          </div> */}
         </aside>
 
         {/* Right Side Stage View */}
@@ -81,7 +65,7 @@ export default function GhanaCertificatePage() {
           {/* Centered Stage Wrapper */}
           <div className='flex-1 overflow-x-auto overflow-y-hidden p-4 sm:p-8 flex items-center justify-start lg:justify-center bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] dark:bg-[radial-gradient(#1f2937_1px,transparent_1px)]'>
             <div
-              ref={certificateRef}
+              // ref={certificateRef}
               className='relative my-auto mx-auto shrink-0 shadow-2xl rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white p-2'
             >
               <CertificateCanvas

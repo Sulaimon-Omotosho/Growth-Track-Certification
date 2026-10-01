@@ -158,7 +158,7 @@
 'use client'
 
 import { Download, FileText } from 'lucide-react'
-import { toPng } from 'html-to-image'
+import { toPng, toBlob } from 'html-to-image'
 import jsPDF from 'jspdf'
 import { useState } from 'react'
 
@@ -177,21 +177,24 @@ export function DownloadButtons({
       .replace(/\s+/g, '-')
       .replace(/[^\w-]/g, '') || 'certificate'
 
-  const generateCanvasDataUrl = async (
-    targetNode: HTMLElement,
-  ): Promise<string> => {
-    await toPng(targetNode, { cacheBust: true, pixelRatio: 3 })
-
-    return await toPng(targetNode, {
+  // Generate crisp, high-resolution export data
+  const captureHighResBlob = async (targetNode: HTMLElement) => {
+    const exportOptions = {
       cacheBust: true,
-      pixelRatio: 3,
+      pixelRatio: 3, // High sharpness crispness
+      canvasWidth: 2400, // Forces export at original template HD resolution
+      canvasHeight: 1695,
       style: {
         transform: 'scale(1)',
         transformOrigin: 'top left',
-        width: targetNode.offsetWidth + 'px',
-        height: targetNode.offsetHeight + 'px',
       },
-    })
+    }
+
+    // Warmup render for fonts and canvas textures
+    await toBlob(targetNode, exportOptions)
+
+    // Final crisp Blob render
+    return await toBlob(targetNode, exportOptions)
   }
 
   const downloadPNG = async () => {
@@ -199,12 +202,25 @@ export function DownloadButtons({
     setIsExporting(true)
 
     try {
-      const dataUrl = await generateCanvasDataUrl(certificateRef.current)
+      const targetNode = certificateRef.current
+      const blob = await captureHighResBlob(targetNode)
+
+      if (!blob) throw new Error('Failed to generate crisp PNG blob')
+
+      const blobUrl = URL.createObjectURL(blob)
+      const fileName = `${getFileName()}.png`
+      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent)
 
       const link = document.createElement('a')
-      link.download = `${getFileName()}.png`
-      link.href = dataUrl
+      link.href = blobUrl
+      link.download = fileName
+      if (isIOS) link.target = '_blank'
+
+      document.body.appendChild(link)
       link.click()
+      document.body.removeChild(link)
+
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 10000)
     } catch (error) {
       console.error('PNG download failed:', error)
     } finally {
@@ -217,7 +233,14 @@ export function DownloadButtons({
     setIsExporting(true)
 
     try {
-      const dataUrl = await generateCanvasDataUrl(certificateRef.current)
+      const targetNode = certificateRef.current
+      const dataUrl = await toPng(targetNode, {
+        cacheBust: true,
+        pixelRatio: 3,
+        canvasWidth: 2400,
+        canvasHeight: 1695,
+      })
+
       const img = new Image()
       img.src = dataUrl
 
@@ -248,7 +271,7 @@ export function DownloadButtons({
         disabled={isExporting}
       >
         <Download className='mr-1.5 h-3.5 w-3.5 text-zinc-500' />
-        PNG
+        {isExporting ? 'Exporting...' : 'PNG'}
       </Button>
 
       <Button

@@ -59,9 +59,9 @@ export function CertificateCanvas({
           }))
         }
       >
-        <div className='group relative cursor-move p-2 rounded hover:ring-2 hover:ring-indigo-500/50 transition-shadow'>
+        <div className='group relative cursor-move p-2 rounded hover:ring-2 hover:ring-indigo-500/50 transition-shadow text-center'>
           <h1
-            className='select-none whitespace-nowrap font-bold leading-none tracking-wide'
+            className='select-none whitespace-nowrap font-bold leading-none tracking-wide text-center'
             style={{
               fontSize: `${certificate.fontSize}px`,
               fontFamily: certificate.fontFamily,

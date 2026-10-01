@@ -15,7 +15,8 @@ export default function GhanaCertificatePage() {
     fontSize: 60,
     fontFamily: 'serif',
     textColor: '#000000',
-    position: { x: 100, y: 100 },
+    position: { x: 220, y: 180 },
+    // position: { x: 100, y: 100 },
   })
 
   const [issueDate, setIssueDate] = useState<string>('')
